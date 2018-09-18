@@ -29,13 +29,17 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation rootProject.ext.dependencies["appcompat-v7"]
-    implementation rootProject.ext.dependencies["kotlin"]
+//    implementation rootProject.ext.dependencies["appcompat-v7"]
 
-    compile 'io.reactivex:rxandroid:1.1.0'
-    compile 'io.reactivex:rxjava:1.1.5'
-    compile 'com.trello:rxlifecycle:0.3.0'
-    compile 'com.trello:rxlifecycle-components:0.3.0'
+    implementation "com.android.support:appcompat-v7:$rootProject.support"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+//    implementation rootProject.ext.dependencies["kotlin"]
+
+    api "io.reactivex:rxandroid:$rootProject.rxVersion"
+    api "io.reactivex:rxjava:$rootProject.rxVersion"
+    api "com.trello:rxlifecycle:$rootProject.rxlifecycleVersion"
+    api "com.trello:rxlifecycle-components:$rootProject.rxlifecycleVersion"
     //    https://github.com/drakeet/MaterialDialog
-    compile 'me.drakeet.materialdialog:library:1.3.1'
+    api "me.drakeet.materialdialog:library:1.3.1"
 }

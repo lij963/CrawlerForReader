@@ -29,11 +29,14 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    implementation rootProject.ext.dependencies["support-annotation"]
-    implementation rootProject.ext.dependencies["gson"]
+//    implementation rootProject.ext.dependencies["support-annotation"]
+    implementation "com.android.support:support-annotations:$rootProject.support"
+    implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+//    implementation rootProject.ext.dependencies["gson"]
 
     implementation project(path: ':common')
 
-    implementation 'org.jsoup:jsoup:1.11.1'
-    implementation 'org.apache.commons:commons-lang3:3.3.2'
+    implementation "org.jsoup:jsoup:$rootProject.jsoupVersion"
+    implementation "org.apache.commons:commons-lang3:$rootProject.apacheCommonsVersion"
 }

@@ -1,5 +1,5 @@
 # CrawlerForReader
-
+fork自 https://github.com/smuyyh/CrawlerForReader
 Android 本地网络小说爬虫，基于 jsoup 与 xpath，通过模版解析网页。
 
 - [支持书源](#支持书源)

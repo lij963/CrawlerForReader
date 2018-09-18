@@ -1,7 +1,7 @@
 apply from:'config.gradle'
-
 buildscript {
 
+    ext.kotlin_version = '1.2.60'
     repositories {
         google()
         jcenter()
@@ -9,8 +9,8 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.0-alpha04'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.10"
+        classpath 'com.android.tools.build:gradle:3.2.0-beta05'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -23,4 +23,14 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext{
+    support = "27.1.1"
+    glideVersion = "3.7.0"
+    gsonVersion="2.8.2"
+    rxVersion="1.2.1"
+    rxlifecycleVersion="1.0"
+    jsoupVersion="1.11.3"
+    apacheCommonsVersion="3.4"
 }
