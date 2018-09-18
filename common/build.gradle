@@ -31,13 +31,17 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 //    implementation rootProject.ext.dependencies["appcompat-v7"]
 
-    implementation "com.android.support:appcompat-v7:$rootProject.support"
+    api "com.android.support:appcompat-v7:$rootProject.support"
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-//    implementation rootProject.ext.dependencies["kotlin"]
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    api "io.reactivex:rxandroid:$rootProject.rxVersion"
-    api "io.reactivex:rxjava:$rootProject.rxVersion"
+    api "com.android.support:support-annotations:$rootProject.support"
+    api "com.google.code.gson:gson:$rootProject.gsonVersion"
+
+    api "io.reactivex.rxjava2:rxandroid:$rootProject.rxAndroidVersion"
+    api "io.reactivex.rxjava2:rxjava:$rootProject.rxJavaVersion"
+
+
     api "com.trello:rxlifecycle:$rootProject.rxlifecycleVersion"
     api "com.trello:rxlifecycle-components:$rootProject.rxlifecycleVersion"
     //    https://github.com/drakeet/MaterialDialog
