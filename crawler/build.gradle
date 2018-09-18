@@ -28,11 +28,10 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-
-
-
+    //module
     implementation project(path: ':common')
-
+    //Jsoup
     implementation "org.jsoup:jsoup:$rootProject.jsoupVersion"
+    //apache commons-lang3
     implementation "org.apache.commons:commons-lang3:$rootProject.apacheCommonsVersion"
 }
