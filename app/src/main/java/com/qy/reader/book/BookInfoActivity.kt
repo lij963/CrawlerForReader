@@ -16,12 +16,8 @@ import com.qy.reader.common.utils.StringUtils
 import com.qy.reader.common.widgets.ListDialog
 import com.qy.reader.common.widgets.Sneaker
 import com.qy.reader.crawler.Crawler
-import com.qy.reader.crawler.source.callback.ChapterCallback
-import com.trello.rxlifecycle2.android.lifecycle.kotlin.bindToLifecycle
-import io.reactivex.Observable
-import io.reactivex.ObservableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_book_info.*
 import java.util.*
@@ -37,7 +33,7 @@ class BookInfoActivity : BaseActivity() {
     private lateinit var mBookInfoAdapter: BookInfoAdapter
 
     private val mSourceList = ArrayList<SearchBook.SL>()
-
+    var disposable: Disposable? = null
     private val mStrDesc = "倒序"
     private val mStrAsc = "正序"
 
@@ -140,25 +136,18 @@ class BookInfoActivity : BaseActivity() {
 
         mBookInfoAdapter.clear()
         tv_order_by.text = "加载中..."
-        Observable
-                .create(ObservableOnSubscribe<List<Chapter>> { emitter ->
-                    Crawler.catalog(sl, object : ChapterCallback {
-                        override fun onResponse(chapters: List<Chapter>) {
-                            emitter.onNext(chapters)
-                            emitter.onComplete()
-                        }
-
-                        override fun onError(msg: String) {
-                            emitter.onError(Throwable(msg))
-                        }
-                    })
-                })
-                .bindToLifecycle(this)
+        disposable?.let {
+            if (it.isDisposed) {
+                it.dispose()
+            }
+        }
+        disposable = Crawler.catalog(sl)
+//                .bindToLifecycle(this)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(Consumer { chapters ->
+                .subscribe({ chapters ->
                     if (chapters == null || chapters.isEmpty()) {
-                        return@Consumer
+                        return@subscribe
                     }
                     mBookInfoAdapter.addAll(chapters)
 
@@ -172,7 +161,7 @@ class BookInfoActivity : BaseActivity() {
                     } else {
                         tv_order_by.text = mStrDesc
                     }
-                }, Consumer { throwable ->
+                }, { throwable ->
                     Sneaker.with(mContext)
                             .setTitle("加载失败")
                             .setMessage(throwable.message)
@@ -180,5 +169,14 @@ class BookInfoActivity : BaseActivity() {
 
                     tv_order_by.text = "加载失败"
                 })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        disposable?.let {
+            if (it.isDisposed) {
+                it.dispose()
+            }
+        }
     }
 }

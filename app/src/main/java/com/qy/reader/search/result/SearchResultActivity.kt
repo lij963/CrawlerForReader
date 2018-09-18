@@ -10,12 +10,9 @@ import com.qy.reader.common.entity.book.SearchBook
 import com.qy.reader.common.utils.Nav
 import com.qy.reader.common.widgets.Sneaker
 import com.qy.reader.crawler.Crawler
-import com.qy.reader.crawler.source.callback.SearchCallback
 import com.qy.reader.support.DividerItemDecoration
-import com.trello.rxlifecycle2.kotlin.bindToLifecycle
-import io.reactivex.Observable
-import io.reactivex.ObservableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_search_result.*
 import java.util.*
@@ -26,7 +23,7 @@ import java.util.*
 class SearchResultActivity : BaseActivity() {
 
     private lateinit var mAdapter: SearchResultAdapter
-
+    var disposable: Disposable? = null
     private val mList = ArrayList<SearchBook>()
 
     override fun getToolbarTitle(): String {
@@ -62,27 +59,24 @@ class SearchResultActivity : BaseActivity() {
         search(title)
     }
 
+    override fun onPause() {
+        super.onPause()
+        disposable?.let {
+            if (!it.isDisposed) {
+                it.dispose()
+            }
+        }
+    }
+
     @SuppressLint("CheckResult")
     private fun search(title: String) {
         mAdapter.setTitle(title)
-        Observable.create(ObservableOnSubscribe<List<SearchBook>> { emitter ->
-            Crawler.search(this@SearchResultActivity, title, object : SearchCallback {
-                override fun onResponse(keyword: String, appendList: List<SearchBook>) {
-                    emitter.onNext(appendList)
-                }
-
-                override fun onFinish() {
-                    emitter.onComplete()
-                }
-
-                override fun onError(msg: String) {
-                    if (!emitter.isDisposed) {
-                        emitter.onError(Throwable(msg))
-                    }
-                }
-            })
-        })
-                .bindToLifecycle(this)
+        disposable?.let {
+            if (!it.isDisposed) {
+                it.dispose()
+            }
+        }
+        disposable = Crawler.search(title)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -118,5 +112,14 @@ class SearchResultActivity : BaseActivity() {
                                     .setMessage("共搜索到" + mList.size + "本书")
                                     .sneakSuccess()
                         })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        disposable?.let {
+            if (!it.isDisposed) {
+                it.dispose()
+            }
+        }
     }
 }
