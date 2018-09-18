@@ -63,83 +63,6 @@ object Crawler {
                             callback?.onFinish()
                         }
                 )
-
-//        for (i in 0 until SourceManager.CONFIGS.size()) {
-//            val id = SourceManager.CONFIGS.keyAt(i)
-//            val config = SourceManager.CONFIGS.valueAt(i)
-//            val source = SourceManager.SOURCES.get(id)
-//            if (!checkedMap.get(id)) {
-//                continue
-//            }
-//
-//            val rs: List<JXNode>?
-//            val url: String
-//            try {
-//                url = if (!TextUtils.isEmpty(config.search.charset)) {
-//                    String.format(source.searchURL, URLEncoder.encode(keyword, config.search.charset))
-//                } else {
-//                    String.format(source.searchURL, keyword)
-//                }
-//                Log.i(TAG, "url=$url")
-//                @Suppress("DEPRECATION")
-//                val jxDocument = JXDocument(Jsoup.connect(url).validateTLSCertificates(false).get())
-//                rs = jxDocument.selN(config.search.xpath)
-//            } catch (e: Exception) {
-//                Log.e(TAG, e.toString())
-//                continue
-//            }
-//
-//            if (rs == null) {
-//                continue
-//            }
-//
-//            val books = ArrayList<SearchBook>()
-//            try { // 提高容错性
-//                for (jxNode in rs) {
-//                    val book = SearchBook()
-//
-//                    book.cover = urlVerification(getNodeStr(jxNode, config.search.coverXpath), url)
-//                    Log.i(TAG, "cover=" + book.cover)
-//
-//                    book.title = getNodeStr(jxNode, config.search.titleXpath)
-//                    Log.i(TAG, "title=" + book.title)
-//
-//                    var link = urlVerification(getNodeStr(jxNode, config.search.linkXpath), url)
-//                    if (source.id == SourceID.CHINESEWUZHOU ||
-//                            source.id == SourceID.YANMOXUAN ||
-//                            source.id == SourceID.QIANQIANXIAOSHUO ||
-//                            source.id == SourceID.PIAOTIANWENXUE) {
-//                        link = link?.substring(0, link.lastIndexOf('/') + 1)
-//                    }
-//                    Log.i(TAG, "link= $link")
-//                    book.sources.add(SearchBook.SL(link, source))
-//
-//                    book.author = getNodeStr(jxNode, config.search.authorXpath)
-//                    if (source.id == SourceID.CHINESEZHUOBI || source.id == SourceID.CHINESEXIAOSHUO) {
-//                        book.author = book.author.replace("作者：", "")
-//                    }
-//                    Log.i(TAG, "author=" + book.author)
-//
-//                    book.desc = getNodeStr(jxNode, config.search.descXpath).trim { it <= ' ' }
-//                    Log.i(TAG, "desc=" + book.desc)
-//
-//                    if (!TextUtils.isEmpty(link)) {//过滤无效信息
-//                        books.add(book)
-//                    }
-//                }
-//
-//                callback?.onResponse(keyword, books)
-//            } catch (e: Exception) {
-//                Log.e(TAG, e.toString())
-//                if (callback != null) {
-//                    callback.onError(e.toString())
-//                    return
-//                }
-//            }
-//
-//        }
-//
-//        callback?.onFinish()
     }
 
     @Suppress("DEPRECATION")
@@ -197,7 +120,7 @@ object Crawler {
             }
         } catch (e: Exception) {
             Log.e(TAG, e.toString())
-            callback?.onError(e.toString())
+//            callback?.onError(e.toString())
         }
         return books
     }
