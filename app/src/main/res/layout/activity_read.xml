@@ -32,9 +32,9 @@
     <LinearLayout
         android:id="@+id/ll_book_read_bottom"
         style="@style/VerticalLayout"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
         android:background="@color/colorReadBar"
         android:orientation="vertical">
 

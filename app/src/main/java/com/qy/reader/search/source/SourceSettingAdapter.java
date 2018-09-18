@@ -5,12 +5,8 @@ import android.util.SparseBooleanArray;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.qy.reader.R;
 import com.qy.reader.common.entity.source.Source;
-import com.qy.reader.common.entity.source.SourceEnable;
-import com.qy.reader.common.utils.SPUtils;
 import com.qy.reader.crawler.source.SourceManager;
 import com.yuyh.easyadapter.recyclerview.EasyRVAdapter;
 import com.yuyh.easyadapter.recyclerview.EasyRVHolder;

@@ -13,7 +13,6 @@ import com.qy.reader.R;
 import com.qy.reader.common.base.BaseActivity;
 import com.qy.reader.common.entity.book.SearchBook;
 import com.qy.reader.common.entity.chapter.Chapter;
-import com.qy.reader.common.entity.source.Source;
 import com.qy.reader.common.utils.Nav;
 import com.qy.reader.common.utils.StringUtils;
 import com.qy.reader.common.widgets.ListDialog;
@@ -162,7 +161,7 @@ public class BookInfoActivity extends BaseActivity {
                 .create(new Observable.OnSubscribe<List<Chapter>>() {
                     @Override
                     public void call(final Subscriber<? super List<Chapter>> subscriber) {
-                        Crawler.catalog(sl, new ChapterCallback() {
+                        Crawler.INSTANCE.catalog(sl, new ChapterCallback() {
                             @Override
                             public void onResponse(List<Chapter> chapters) {
                                 subscriber.onNext(chapters);

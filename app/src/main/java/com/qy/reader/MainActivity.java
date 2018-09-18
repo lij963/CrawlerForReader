@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //                    }
 //                });
-                Crawler.catalog(new SearchBook.SL("https://www.liewen.cc/b/24/24934/", SourceManager.SOURCES.get(1)), new ChapterCallback() {
+                Crawler.INSTANCE.catalog(new SearchBook.SL("https://www.liewen.cc/b/24/24934/", SourceManager.SOURCES.get(1)), new ChapterCallback() {
                     @Override
                     public void onResponse(List<Chapter> chapters) {
 
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-                Crawler.content(new SearchBook.SL("https://www.liewen.cc/b/24/24934/", SourceManager.SOURCES.get(1)), "/b/24/24934/12212511.html", new ContentCallback() {
+                Crawler.INSTANCE.content(new SearchBook.SL("https://www.liewen.cc/b/24/24934/", SourceManager.SOURCES.get(1)), "/b/24/24934/12212511.html", new ContentCallback() {
                     @Override
                     public void onResponse(String content) {
 

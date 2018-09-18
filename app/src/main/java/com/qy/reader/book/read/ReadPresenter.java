@@ -35,7 +35,7 @@ public class ReadPresenter implements ReadContract.Presenter {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                Crawler.content(source, chapter.link, new ContentCallback() {
+                Crawler.INSTANCE.content(source, chapter.link, new ContentCallback() {
                     @Override
                     public void onResponse(final String content) {
                         BookManager.getInstance().saveContentFile(source.source.id, bookNum, chapter.title, content);

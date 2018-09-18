@@ -1,6 +1,5 @@
 package com.qy.reader.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -17,6 +16,12 @@ import com.qy.reader.common.utils.StatusBarCompat;
 public class SplashActivity extends BaseActivity {
 
     private TextView mTvSkip;
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            end();
+        }
+    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,13 +42,6 @@ public class SplashActivity extends BaseActivity {
         mTvSkip.postDelayed(runnable, 500);
 
     }
-
-    private Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            end();
-        }
-    };
 
     private void end() {
         Nav.from(this).start("qyreader://home");

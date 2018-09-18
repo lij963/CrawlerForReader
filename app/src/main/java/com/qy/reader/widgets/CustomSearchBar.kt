@@ -11,7 +11,6 @@ import android.view.View
 import android.widget.*
 import com.qy.reader.common.R
 import com.qy.reader.common.utils.Nav
-import com.qy.reader.search.result.SearchResultActivity
 import com.qy.reader.search.source.SourceSettingActivity
 
 

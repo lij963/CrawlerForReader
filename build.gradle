@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0-beta05'
+        classpath 'com.android.tools.build:gradle:3.3.0-alpha08'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -31,7 +31,7 @@ ext{
     gsonVersion="2.8.2"
     rxJavaVersion="2.2.2"
     rxAndroidVersion="2.1.0"
-    rxlifecycleVersion="1.0"
+    rxlifecycleVersion="2.2.2"
     jsoupVersion="1.11.3"
     apacheCommonsVersion="3.4"
 }

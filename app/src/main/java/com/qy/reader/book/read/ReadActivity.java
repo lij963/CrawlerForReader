@@ -164,6 +164,12 @@ public class ReadActivity extends BaseActivity implements ReadContract.View {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.release();
+    }
+
     private class PagerListener implements OnPageStateChangedListener {
 
         @Override
@@ -197,11 +203,5 @@ public class ReadActivity extends BaseActivity implements ReadContract.View {
                 }
             }
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mPresenter.release();
     }
 }
